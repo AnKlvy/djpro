@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     #Create to me fle
     'pages',
 
+
     #Django initails app
     'django.contrib.admin',
     'django.contrib.auth',
