@@ -1,7 +1,8 @@
 from django.db import models
 
+
 # Create your models here.
-class Products (models.Model):
+class Products(models.Model):
     name = models.CharField(max_length=255)
     price = models.BigIntegerField()
     description = models.TextField(max_length=700)
@@ -13,14 +14,16 @@ class Products (models.Model):
     def __str__(self):
         return self.name
 
-class ProdCategories (models.Model):
+
+class ProdCategories(models.Model):
     name = models.CharField(max_length=255)
-    products = models.ManyToManyField(Products)
+    products = models.ManyToManyField(Products, related_name='categories')
 
     def __str__(self):
         return self.name
 
-class Posts (models.Model):
+
+class Posts(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(max_length=700)
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/")
@@ -31,9 +34,10 @@ class Posts (models.Model):
     def __str__(self):
         return self.name
 
-class PostCategories (models.Model):
+
+class PostCategories(models.Model):
     name = models.CharField(max_length=255)
-    products = models.ManyToManyField(Posts)
+    products = models.ManyToManyField(Posts, related_name='categories')
 
     def __str__(self):
         return self.name
