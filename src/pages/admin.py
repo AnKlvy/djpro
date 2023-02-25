@@ -1,6 +1,36 @@
 from django.contrib import admin
-from pages.models import Products, Posts
+from pages.models import Products, Posts, ProdCategories, PostCategories
 
 
-admin.site.register(Products)
-admin.site.register(Posts)
+class ProdAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    list_display = (
+        'id', 'name', 'time_create', 'photo', 'is_published')
+    list_editable = ('is_published',)
+    list_filter = ('is_published', 'time_create')
+
+
+class PostAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    list_display = (
+        'id', 'name', 'time_create', 'photo', 'is_published')
+    list_editable = ('is_published',)
+    list_filter = ('is_published', 'time_create')
+
+
+class PrCatAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    list_display = ('id', 'name', 'time_create')
+    list_filter = ('time_create',)
+
+
+class PsCatAdmin(admin.ModelAdmin):
+    search_fields = ('name',)
+    list_display = ('id', 'name', 'time_create')
+    list_filter = ('time_create',)
+
+
+admin.site.register(Products, ProdAdmin)
+admin.site.register(Posts, PostAdmin)
+admin.site.register(ProdCategories, PrCatAdmin)
+admin.site.register(PostCategories, PsCatAdmin)
