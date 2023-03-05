@@ -1,0 +1,38 @@
+
+<!--{% block body %}-->
+<body>
+{% include "pages/nav.html" %}
+<div class="container mt-5">
+    <div class="row">
+        <div>
+            <h1>This is body</h1>
+            <p>Will be extended body</p>
+        </div>
+        <div>
+            {% if products %}
+            <ul>
+                {% for p in products %}
+                <li><a href="">{{ p.name }}</a></li>
+                <img src="/{{p.photo}}">
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No products are available.</p>
+            {% endif %}
+        </div>
+        /////////////////////////////
+        <div>
+            {% if cats %}
+            <ul>
+                {% for c in cats %}
+                <li><a href="">{{ c.name }}</a></li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p>No categories are available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+</body>
+<!--{% endblock %}-->

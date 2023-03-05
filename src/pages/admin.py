@@ -7,7 +7,8 @@ class ProdAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'time_create', 'photo', 'is_published')
     list_editable = ('is_published',)
-    list_filter = ('is_published', 'time_create')
+    list_filter = ('is_published', 'time_create', 'categories')
+    list_display_links = ('id', 'name')
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -15,19 +16,22 @@ class PostAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'name', 'time_create', 'photo', 'is_published')
     list_editable = ('is_published',)
-    list_filter = ('is_published', 'time_create')
+    list_filter = ('is_published', 'time_create', 'categories')
+    list_display_links = ('id', 'name')
 
 
 class PrCatAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_display = ('id', 'name', 'time_create')
     list_filter = ('time_create',)
+    list_display_links = ('id', 'name')
 
 
 class PsCatAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_display = ('id', 'name', 'time_create')
     list_filter = ('time_create',)
+    list_display_links = ('id', 'name')
 
 
 admin.site.register(Products, ProdAdmin)
