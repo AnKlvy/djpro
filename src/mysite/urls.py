@@ -16,14 +16,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-
 from pages.views import (
     home_screen_view,
+    show_product
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view),
+    path('product/<int:prod_id>/', show_product, name='product'),
 ]
 handler500 = 'pages.views.error500'
 handler404 = 'pages.views.error_404'

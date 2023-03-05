@@ -10,16 +10,18 @@
             <p>Will be extended body</p>
         </div>
         <div>
+            {% block content%}
             {% if products %}
             <ul>
                 {% for p in products %}
-                <li><a href="">{{ p.name }}</a></li>
-                <img src="/{{p.photo}}">
+                <li><a href="product/{{p.id}}">{{ p.name }}</a></li>
+                <img src="{{p.photo}}">
                 {% endfor %}
             </ul>
             {% else %}
             <p>No products are available.</p>
             {% endif %}
+            {% endblock content%}
         </div>
         /////////////////////////////
         <div>

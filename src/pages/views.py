@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import *
 
 # Create your views here.
@@ -7,6 +7,10 @@ def home_screen_view(request):
     print(request.headers)
     products = Products.objects.order_by('-time_create')
     return render(request, 'index.html', {'products': products})
+
+def show_product(request, prod_id):
+    product = get_object_or_404(Products, pk = prod_id)
+    return render(request, 'pages/product.html', {'product':product})
 
 # ERRORS LOGIC
 def error_404(request, exception):
