@@ -4,12 +4,13 @@ from django.urls import reverse
 
 # Create your models here.
 class ProdCategories(models.Model):
+    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
     name = models.CharField(max_length=255, verbose_name="Категория")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_id': self.pk})
+        return reverse('post', kwargs={'post_slug': self.slug})
 
     class Meta:
         verbose_name = "Категории продукта"
@@ -22,6 +23,7 @@ class ProdCategories(models.Model):
 
 class Products(models.Model):
     name = models.CharField(max_length=255, verbose_name="Продукты")
+    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
     price = models.BigIntegerField(verbose_name="Цена")
     description = models.TextField(max_length=700, verbose_name="Описание")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name="Фото")
@@ -32,7 +34,7 @@ class Products(models.Model):
         ProdCategories, related_name='categories', verbose_name="Категории")
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_id': self.pk})
+        return reverse('product', kwargs={'prod_slug': self.slug})
 
     class Meta:
         verbose_name = "Продукт"
@@ -44,6 +46,7 @@ class Products(models.Model):
 
 
 class PostCategories(models.Model):
+    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
     name = models.CharField(max_length=255, verbose_name="Категория")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
@@ -61,6 +64,7 @@ class PostCategories(models.Model):
 
 
 class Posts(models.Model):
+    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
     name = models.CharField(max_length=255, verbose_name="Пост")
     description = models.TextField(max_length=700, verbose_name="Описание")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name="Фото")
@@ -70,7 +74,7 @@ class Posts(models.Model):
     categories = models.ManyToManyField(PostCategories, related_name='categories', verbose_name="Категории")
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_id': self.pk})
+        return reverse('post', kwargs={'post_slug': self.slug})
 
     class Meta:
         verbose_name = "Пост"

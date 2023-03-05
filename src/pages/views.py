@@ -8,8 +8,8 @@ def home_screen_view(request):
     products = Products.objects.order_by('-time_create')
     return render(request, 'index.html', {'products': products})
 
-def show_product(request, prod_id):
-    product = get_object_or_404(Products, pk = prod_id)
+def show_product(request, prod_slug):
+    product = get_object_or_404(Products, slug = prod_slug)
     return render(request, 'pages/product.html', {'product':product})
 
 # ERRORS LOGIC

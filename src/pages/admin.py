@@ -9,6 +9,7 @@ class ProdAdmin(admin.ModelAdmin):
     list_editable = ('is_published',)
     list_filter = ('is_published', 'time_create', 'categories')
     list_display_links = ('id', 'name')
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -18,6 +19,7 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ('is_published',)
     list_filter = ('is_published', 'time_create', 'categories')
     list_display_links = ('id', 'name')
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class PrCatAdmin(admin.ModelAdmin):
@@ -25,6 +27,7 @@ class PrCatAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'time_create')
     list_filter = ('time_create',)
     list_display_links = ('id', 'name')
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class PsCatAdmin(admin.ModelAdmin):
@@ -32,6 +35,7 @@ class PsCatAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'time_create')
     list_filter = ('time_create',)
     list_display_links = ('id', 'name')
+    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Products, ProdAdmin)
