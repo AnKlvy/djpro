@@ -4,7 +4,7 @@ from pages.models import *
 register = template.Library()
 
 @register.simple_tag()
-def get_categories():
+def getcats():
     return ProdCategories.objects.all()
 
 @register.inclusion_tag('pages/list_categories.html')

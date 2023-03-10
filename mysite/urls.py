@@ -18,13 +18,16 @@ from django.urls import path
 
 from pages.views import (
     home_screen_view,
-    show_product
+    show_product,
+    add_post
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home_screen_view),
     path('product/<slug:prod_slug>/', show_product, name='product'),
+    path('addpost', add_post, name= 'addpost'),
+
 ]
 handler500 = 'pages.views.error500'
 handler404 = 'pages.views.error_404'
