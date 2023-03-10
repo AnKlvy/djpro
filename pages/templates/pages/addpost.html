@@ -3,7 +3,33 @@
 <h1>{{title}}</h1>
 <form action="{% url 'addpost' %}" method="post">
     {%csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Add</button>
+
+    <div class="errors">{{form.non_field_errors}}</div>
+
+    {% for f in form%}
+    <div class="form-group">
+        <label for="{{f.id_for_label}}">{{f.label}}:</label>
+        {{f}}
+        <div class="errors">{{f.errors}}</div>
+    </div>
+    {%endfor%}
+    <button type="submit" class="btn btn-primary">Add</button>
 </form>
 {%endblock content%}
+
+<!--            <input type="text" class="form-control" id="name" name="name">-->
+<!--            <input type="text" class="form-control" id="slug" name="slug">-->
+<!--            <textarea class="form-control" id="content" name="content"></textarea>-->
+
+<!-- <div class="form-group form-check">-->
+<!--        <label class="form-check-label" for="{{form.is_published.id_for_label}}">Is published</label>-->
+<!--        {{form.is_published}}-->
+<!--        <div class="errors">{{form.is_published.errors}}</div>-->
+<!--    </div>-->
+<!--            <input type="checkbox" class="form-check-input" id="is-published" name="is_published">-->
+
+<!--            <select class="form-control" id="categories" name="categories" multiple>-->
+<!--                <option value="1">Category 1</option>-->
+<!--                <option value="2">Category 2</option>-->
+<!--                <option value="3">Category 3</option>-->
+<!--            </select>-->

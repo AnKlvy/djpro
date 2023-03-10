@@ -1,7 +1,8 @@
 <h1 align="center">Hi 👋, I'm Nurzhigit</h1>
 
 <h2 align="center">Project name: MStore</h1>
-<h3 align="center">This is a project created on Django, and I want to write here a list of commands and libraries that will be used in this project</h3>
+<h3 align="center">This is a project created on Django, and I want to write here a list of commands and libraries that
+will be used in this project</h3>
 
 <h3 align="left"> First command:</h3>
 <p align="left">$ pip install virtualenv</p>

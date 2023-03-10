@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 
 from .forms import *
 from .models import *
@@ -21,11 +21,16 @@ def add_post(request):
     if request.method == 'POST':
         form = AddPostForm(request.POST)
         if form.is_valid():
-            print(form.cleaned_data)
+            # print(form.cleaned_data)
+            try:
+                Posts.objects.create(**form.cleaned_data)
+                return redirect('home')
+            except:
+                form.add_error(None, 'Error of adding post')
     else:
         form = AddPostForm()
     return render(request, 'pages/addpost.html',
-                  {'form': form, 'title': 'Добавление поста'})
+                  {'form': form, 'title': 'Adding post'})
 
 
 # ERRORS LOGIC

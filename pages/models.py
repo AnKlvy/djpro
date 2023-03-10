@@ -5,7 +5,7 @@ from django.urls import reverse
 # Create your models here.
 class ProdCategories(models.Model):
     name = models.CharField(max_length=255, verbose_name="Категория")
-    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
 
@@ -23,7 +23,7 @@ class ProdCategories(models.Model):
 
 class Products(models.Model):
     name = models.CharField(max_length=255, verbose_name="Продукты")
-    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     price = models.BigIntegerField(verbose_name="Цена")
     description = models.TextField(max_length=700, verbose_name="Описание")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name="Фото")
@@ -47,7 +47,7 @@ class Products(models.Model):
 
 class PostCategories(models.Model):
     name = models.CharField(max_length=255, verbose_name="Категория")
-    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
 
@@ -65,7 +65,7 @@ class PostCategories(models.Model):
 
 class Posts(models.Model):
     name = models.CharField(max_length=255, verbose_name="Пост")
-    slug = models.SlugField(max_length=255, unique = True, db_index=True, verbose_name="URL")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     description = models.TextField(max_length=700, verbose_name="Описание")
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name="Фото")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Время создания")

@@ -24,9 +24,9 @@ from pages.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_screen_view),
+    path('', home_screen_view, name='home'),
     path('product/<slug:prod_slug>/', show_product, name='product'),
-    path('addpost', add_post, name= 'addpost'),
+    path('addpost', add_post, name='addpost'),
 
 ]
 handler500 = 'pages.views.error500'
