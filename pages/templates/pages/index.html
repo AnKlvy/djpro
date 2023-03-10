@@ -9,39 +9,41 @@
             <h1>This is body</h1>
             <p>Will be extended body</p>
         </div>
-        {%block content%}
         {% load pages_tags %}
-        {% getcats as cats%}
-        <div>
-            {% if products %}
-            <ul>
-                {% for p in products %}
-                <li><a href="{{p.get_absolute_url}}">{{ p.name }}</a></li>
-                <img src="{{p.photo}}">
-                {% endfor %}
-            </ul>
-            {% else %}
-            <p>No products are available.</p>
-            {% endif %}
-        </div>
+        {% getcats as cats %}
+        {% block content %}
+
+            <div>
+                {% if products %}
+                    <h1>Products</h1>
+                    <ul>
+                        {% for p in products %}
+                            <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
+                            <img src="{{ p.photo.url }}">
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p>No products are available.</p>
+                {% endif %}
+            </div>
+        {% endblock content %}
         /////////////////////////////
         <h3>Categories</h3>
         <div>
             {% if cats %}
-            <ul>
-                {% for c in cats %}
-                <li><a href="">{{ c.name }}</a></li>
-                {% endfor %}
-            </ul>
+                <ul>
+                    {% for c in cats %}
+                        <li><a href="">{{ c.name }}</a></li>
+                    {% endfor %}
+                </ul>
             {% else %}
-            <p>No categories are available.</p>
+                <p>No categories are available.</p>
             {% endif %}
         </div>
         /////////////////////////
         <div>
             {% show_categories %}
         </div>
-        {%endblock content%}
     </div>
 </div>
 </body>

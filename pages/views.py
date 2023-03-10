@@ -36,7 +36,7 @@ class ShowProduct(DetailView):
 class AddPost(CreateView):
     form_class = AddPostForm
     template_name = 'pages/addpost.html'
-    # success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home')
 
 
 # def add_post(request):
