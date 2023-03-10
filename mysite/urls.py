@@ -17,16 +17,19 @@ from django.contrib import admin
 from django.urls import path
 
 from pages.views import (
-    home_screen_view,
-    show_product,
-    add_post
+    # home_screen_view,
+    # show_product,
+    # add_post,
+    AddPost,
+    PagesHome,
+    ShowProduct
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_screen_view, name='home'),
-    path('product/<slug:prod_slug>/', show_product, name='product'),
-    path('addpost', add_post, name='addpost'),
+    path('', PagesHome.as_view(), name='home'),
+    path('product/<slug:prod_slug>/', ShowProduct.as_view(), name='product'),
+    path('addpost/', AddPost.as_view(), name='addpost'),
 
 ]
 handler500 = 'pages.views.error500'

@@ -1,16 +1,16 @@
 {%extends 'pages/index.html'%}
 {%block content%}
 <h1>{{title}}</h1>
-<form action="{% url 'addpost' %}" method="post">
+<form action="{% url 'addpost' %}" method="post" enctype="multipart/form-data">
     {%csrf_token %}
 
-    <div class="errors">{{form.non_field_errors}}</div>
+    <div class="text-danger">{{form.non_field_errors}}</div>
 
     {% for f in form%}
     <div class="form-group">
         <label for="{{f.id_for_label}}">{{f.label}}:</label>
         {{f}}
-        <div class="errors">{{f.errors}}</div>
+        <div class="text-danger">{{f.errors}}</div>
     </div>
     {%endfor%}
     <button type="submit" class="btn btn-primary">Add</button>
@@ -24,7 +24,7 @@
 <!-- <div class="form-group form-check">-->
 <!--        <label class="form-check-label" for="{{form.is_published.id_for_label}}">Is published</label>-->
 <!--        {{form.is_published}}-->
-<!--        <div class="errors">{{form.is_published.errors}}</div>-->
+<!--        <div class="text-danger"">{{form.is_published.errors}}</div>-->
 <!--    </div>-->
 <!--            <input type="checkbox" class="form-check-input" id="is-published" name="is_published">-->
 
