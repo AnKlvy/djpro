@@ -1,0 +1,12 @@
+<h3>Categories</h3>
+<div>
+    {% if cats %}
+    <ul>
+        {% for c in cats %}
+        <li><a href="">{{ c.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No categories are available.</p>
+    {% endif %}
+</div>
