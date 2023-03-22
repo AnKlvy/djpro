@@ -3,7 +3,7 @@
 <h1>{{product.name}}</h1>
 
 {% if product.photo %}
-<p><img src="{{product.photo.url}}"></p>
+<p><img class="w-50 h-auto rounded" src="{{ product.photo.url }}" alt="{{ p.name }}"></p>
 {% endif %}
 
 {{product.description|linebreaks}}

@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from mysite import settings
 
 from pages.views import (
     # home_screen_view,
@@ -32,6 +34,8 @@ urlpatterns = [
     path('addpost/', AddPost.as_view(), name='addpost'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler500 = 'pages.views.error500'
 handler404 = 'pages.views.error_404'
 handler403 = 'pages.views.error_403'
