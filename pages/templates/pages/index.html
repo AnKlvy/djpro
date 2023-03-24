@@ -6,46 +6,68 @@
 {% include "pages/nav.html" %}
 <div class="container mt-5">
     <div class="row">
-        <div>
-            <h1>This is body</h1>
-            <p>Will be extended body</p>
-        </div>
-        {% load pages_tags %}
-        {% getcats as cats %}
-        {% block content %}
+        <div class="col-md-2">
+            <div class="list-group">
+                {% if cat_selected == 0 %}
+                    <div class="list-group-item active">All categories</div>
 
+                {% else %}
+                    <a class="list-group-item" href="{% url 'home' %}">Все категории</a>
+                {% endif %}
+                {% for c in cats %}
+                    {% if c.products__count > 0 %}
+                        {% if c.pk == cat_selected %}
+                            <div class="list-group-item active">{{ c.name }}</div>
+                        {% else %}
+                            <a href="{{ c.get_absolute_url }}" class="list-group-item">{{ c.name }}</a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-md-9">
             <div>
-                {% if products %}
-                    <h1>Products</h1>
+                <h1>This is body</h1>
+                <p>Will be extended body</p>
+            </div>
+            {% load pages_tags %}
+            {% getcats as cats %}
+            {% block content %}
+
+                <div>
+                    {% if products %}
+                        <h1>Products</h1>
+                        <ul>
+                            {% for p in products %}
+                                <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
+                                {% if p.photo %}
+                                    <img class="w-50 h-auto rounded" src="{{ p.photo.url }}" alt="{{ p.name }}">
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No products are available.</p>
+                    {% endif %}
+                </div>
+            {% endblock content %}
+            /////////////////////////////
+            <h3>Categories</h3>
+            <div>
+                {% if cats %}
                     <ul>
-                        {% for p in products %}
-                            <li><a href="{{ p.get_absolute_url }}">{{ p.name }}</a></li>
-                            {% if p.photo %}
-                                <img class="w-50 h-auto rounded" src="{{ p.photo.url }}" alt="{{ p.name }}">
-                            {% endif %}
+                        {% for c in cats %}
+                            <li><a href="">{{ c.name }}</a></li>
                         {% endfor %}
                     </ul>
                 {% else %}
-                    <p>No products are available.</p>
+                    <p>No categories are available.</p>
                 {% endif %}
             </div>
-        {% endblock content %}
-        /////////////////////////////
-        <h3>Categories</h3>
-        <div>
-            {% if cats %}
-                <ul>
-                    {% for c in cats %}
-                        <li><a href="">{{ c.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>No categories are available.</p>
-            {% endif %}
-        </div>
-        /////////////////////////
-        <div>
-            {% show_categories %}
+            /////////////////////////
+            <div>
+                {% show_categories %}
+            </div>
         </div>
     </div>
 </div>

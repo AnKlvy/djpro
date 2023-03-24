@@ -10,7 +10,7 @@ class ProdCategories(models.Model):
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
 
     def get_absolute_url(self):
-        return reverse('post', kwargs={'post_slug': self.slug})
+        return reverse('category', kwargs={'cat_slug': self.slug})
 
     class Meta:
         verbose_name = "Категории продукта"
@@ -31,7 +31,8 @@ class Products(models.Model):
     time_update = models.DateTimeField(auto_now=True, verbose_name="Время изменения")
     is_published = models.BooleanField(default=True, verbose_name="Публикация")
     categories = models.ManyToManyField(
-        ProdCategories, related_name='categories', verbose_name="Категории")
+        ProdCategories, related_name='categories',
+        related_query_name='products', verbose_name="Категории")
 
     def get_absolute_url(self):
         return reverse('product', kwargs={'prod_slug': self.slug})
