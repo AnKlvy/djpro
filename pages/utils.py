@@ -5,7 +5,7 @@ from .models import *
 menu = [{'title': "About", 'url_name': 'about'},
         {'title': "Add post", 'url_name': 'addpost'},
         {'title': "Contact us", 'url_name': 'contact'},
-        {'title': "Log in", 'url_name': 'login'}]
+        ]
 
 
 class DataMixin:
