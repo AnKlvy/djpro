@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from django.db.models import Count
 
 from .models import *
@@ -12,7 +13,10 @@ class DataMixin:
     paginate_by = 3
     def get_user_context(self, **kwargs):
         context = kwargs
-        cats = ProdCategories.objects.annotate(Count('products'))
+        cats = cache.get('cats')
+        if not cats:
+            cats = ProdCategories.objects.annotate(Count('products'))
+            cache.set('cats', cats, 60)
 
         user_menu = menu.copy()
         if not self.request.user.is_authenticated:
