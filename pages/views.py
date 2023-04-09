@@ -53,7 +53,7 @@ class ShowProduct(DataMixin, DetailView):
 
 class AddPost(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddPostForm
-    template_name = 'pages/addpost.html'
+    template_name = 'pages/forms/addpost.html'
     success_url = reverse_lazy('home')
     login_url = '/admin/'
 
@@ -86,7 +86,7 @@ class ProdCategory(DataMixin, ListView):
 
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
-    template_name = 'pages/register.html'
+    template_name = 'pages/forms/register.html'
     success_url = reverse_lazy('login')
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -102,7 +102,7 @@ class RegisterUser(DataMixin, CreateView):
 
 class LoginUser(DataMixin, LoginView):
     form_class = LoginUserForm
-    template_name = 'pages/login.html'
+    template_name = 'pages/forms/login.html'
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -147,7 +147,7 @@ def about(request):
 
 class ContactFormView(DataMixin, FormView):
     form_class = ContactForm
-    template_name = 'pages/contact.html'
+    template_name = 'pages/forms/contact.html'
     success_url = reverse_lazy('home')
 
     def get_context_data(self, *, object_list=None, **kwargs):
