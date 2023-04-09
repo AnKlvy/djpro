@@ -11,7 +11,9 @@ menu = [{'title': "About", 'url_name': 'about'},
 
 class DataMixin:
     paginate_by = 3
+
     def get_user_context(self, **kwargs):
+        print("c=", kwargs)
         context = kwargs
         cats = cache.get('cats')
         if not cats:

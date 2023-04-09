@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-Contact
-</body>
-</html>
+{% extends 'pages/index.html' %}
+{% block content %}
+    <div class="row">
+        <div class="col-6 mx-auto">
+         <h1>{{ title }}</h1>
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="text-danger">{{ form.non_field_errors }}</div>
+
+                        {% for f in form %}
+                            <div class="form-group">
+                                <label for="{{ f.id_for_label }}">{{ f.label }}:</label>
+                                {{ f }}
+                                <div class="text-danger">{{ f.errors }}</div>
+                            </div>
+                        {% endfor %}
+                        <br>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

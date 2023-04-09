@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     # Create to me fle
     'pages',
     'debug_toolbar',
+    'captcha',
     # Django initails app
     'django.contrib.admin',
     'django.contrib.auth',

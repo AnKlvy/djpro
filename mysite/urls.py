@@ -21,6 +21,7 @@ from mysite import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('pages.urls')),
+    path('captcha/', include('captcha.urls')),
 ]
 if settings.DEBUG:
     import debug_toolbar

@@ -7,7 +7,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from .forms import *
 from .models import *
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, FormView
 from .utils import *
 
 
@@ -21,7 +21,9 @@ class PagesHome(DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+
         c_def = self.get_user_context(title="Home page")
+        #print("c=", c_def)
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
@@ -140,8 +142,22 @@ def about(request):
     # return render(request, 'pages/login.html')
 
 
-def contact(request):
-    return render(request, 'pages/contact.html')
+# def contact(request):
+#     return render(request, 'pages/contact.html')
+
+class ContactFormView(DataMixin, FormView):
+    form_class = ContactForm
+    template_name = 'pages/contact.html'
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title="Contact us")
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return redirect('home')
 
 
 # ERRORS LOGIC
