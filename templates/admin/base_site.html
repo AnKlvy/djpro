@@ -1,0 +1,20 @@
+{% extends "admin/base.html" %}
+
+{% load static %}
+{% block extrastyle %}
+{#    {% include 'pages/includes/head.html' %}#}
+    <style>
+#header, .module caption  {
+    background: #5e3a50;
+}
+
+    </style>
+{% endblock extrastyle %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-global %}{% endblock %}
