@@ -9,6 +9,9 @@ from .forms import *
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, FormView
 from .utils import *
+# RestAPI
+from rest_framework import viewsets, generics
+from .serializers import *
 
 
 # Create your views here.
@@ -21,9 +24,10 @@ class PagesHome(DataMixin, ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        print('get_context_data=', context)
 
         c_def = self.get_user_context(title="Home page")
-        #print("c=", c_def)
+        # print("c=", c_def)
         return dict(list(context.items()) + list(c_def.items()))
 
     def get_queryset(self):
@@ -139,7 +143,7 @@ def about(request):
 
 
 # def login(request):
-    # return render(request, 'pages/login.html')
+# return render(request, 'pages/login.html')
 
 
 # def contact(request):
@@ -175,3 +179,22 @@ def error_403(request, exception):
 
 def error_400(request, exception):
     return render(request, 'errors/400.html')
+
+
+# REST API
+class ProductsViewSet(generics.ListAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductsSerializer
+
+    # context_object_name = 'products'
+    # allow_empty = False
+
+    # def get_serializer_context(self, *, object_list=None, **kwargs):
+    #     context = super().get_serializer_context()
+    #
+    #     c_def = self.get_user_context(title="Home page")
+    #     # print("c=", c_def)
+    #     return dict(list(context.items()) + list(c_def.items()))
+
+    # def get_queryset(self):
+    #     return Products.objects.filter(is_published=True).prefetch_related('categories')

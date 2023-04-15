@@ -13,11 +13,12 @@ class DataMixin:
     paginate_by = 3
 
     def get_user_context(self, **kwargs):
-        print("c=", kwargs)
+        print("DataMixin kwargs=", kwargs)
         context = kwargs
         cats = cache.get('cats')
         if not cats:
             cats = ProdCategories.objects.annotate(Count('products'))
+            print('DataMixin cats from if not cats=', cats)
             cache.set('cats', cats, 60)
 
         user_menu = menu.copy()
