@@ -3,7 +3,9 @@ from rest_framework import serializers
 from .models import *
 
 
-class ProductsSerializer(serializers.HyperlinkedModelSerializer):
+class ProductsSerializer(serializers.ModelSerializer):
+    photo = serializers.ImageField(use_url=True)
+
     class Meta:
         model = Products
-        fields = ('slug', 'name', 'price', )
+        fields = "__all__"

@@ -5,6 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+
 from .forms import *
 from .models import *
 from django.views.generic import ListView, DetailView, CreateView, FormView
@@ -182,9 +185,17 @@ def error_400(request, exception):
 
 
 # REST API
-class ProductsViewSet(generics.ListAPIView):
+
+class ProductsAPIListPagination(PageNumberPagination):
+    page_size = 3
+    page_size_query_param = 'page_size'
+    max_page_size = 2
+
+
+class ProductsApiList(generics.ListCreateAPIView):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
+    pagination_class = ProductsAPIListPagination
 
     # context_object_name = 'products'
     # allow_empty = False
@@ -198,3 +209,13 @@ class ProductsViewSet(generics.ListAPIView):
 
     # def get_queryset(self):
     #     return Products.objects.filter(is_published=True).prefetch_related('categories')
+
+
+class ProductsAPIUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductsSerializer
+
+
+class ProductsAPIDestroy(generics.RetrieveDestroyAPIView):
+    queryset = Products.objects.all()
+    serializer_class = ProductsSerializer

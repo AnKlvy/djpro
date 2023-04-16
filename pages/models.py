@@ -37,6 +37,9 @@ class Products(models.Model):
     def get_absolute_url(self):
         return reverse('product', kwargs={'prod_slug': self.slug})
 
+    def img(self):
+        return self.photo.url
+
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
