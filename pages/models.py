@@ -1,6 +1,6 @@
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
-
 
 # Create your models here.
 class ProdCategories(models.Model):
@@ -37,6 +37,7 @@ class Products(models.Model):
     categories = models.ManyToManyField(
         ProdCategories, related_name='categories',
         related_query_name='products', verbose_name="Категории")
+    user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('product', kwargs={'prod_slug': self.slug})
