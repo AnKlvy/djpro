@@ -186,16 +186,20 @@ def error_400(request, exception):
 
 # REST API
 
-class ProductsAPIListPagination(PageNumberPagination):
-    page_size = 3
-    page_size_query_param = 'page_size'
-    max_page_size = 2
-
-
-class ProductsApiList(generics.ListCreateAPIView):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
-    pagination_class = ProductsAPIListPagination
+
+# class ProductsAPIListPagination(PageNumberPagination):
+#     page_size = 3
+#     page_size_query_param = 'page_size'
+#     max_page_size = 2
+#
+#
+# class ProductsApiList(generics.ListCreateAPIView):
+#     queryset = Products.objects.all()
+#     serializer_class = ProductsSerializer
+#     pagination_class = ProductsAPIListPagination
 
     # context_object_name = 'products'
     # allow_empty = False
@@ -211,11 +215,11 @@ class ProductsApiList(generics.ListCreateAPIView):
     #     return Products.objects.filter(is_published=True).prefetch_related('categories')
 
 
-class ProductsAPIUpdate(generics.RetrieveUpdateAPIView):
-    queryset = Products.objects.all()
-    serializer_class = ProductsSerializer
-
-
-class ProductsAPIDestroy(generics.RetrieveDestroyAPIView):
-    queryset = Products.objects.all()
-    serializer_class = ProductsSerializer
+# class ProductsAPIUpdate(generics.RetrieveUpdateAPIView):
+#     queryset = Products.objects.all()
+#     serializer_class = ProductsSerializer
+#
+#
+# class ProductsAPIDestroy(generics.RetrieveDestroyAPIView):
+#     queryset = Products.objects.all()
+#     serializer_class = ProductsSerializer

@@ -21,6 +21,10 @@ class ProdCategories(models.Model):
         return self.name
 
 
+def upload_to(instance, filename):
+    return 'images/{filename}'.format(filename=filename)
+
+
 class Products(models.Model):
     name = models.CharField(max_length=255, verbose_name="Продукты")
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
