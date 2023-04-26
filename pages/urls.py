@@ -1,5 +1,6 @@
 from django.urls import path, re_path, include
 from django.views.decorators.cache import cache_page
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 
 from .views import *
 
@@ -30,4 +31,8 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('category/<slug:cat_slug>/', ProdCategory.as_view(), name='category'),
     path('register/', RegisterUser.as_view(), name='register'),
+
+    path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
