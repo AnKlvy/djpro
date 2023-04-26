@@ -31,8 +31,15 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('category/<slug:cat_slug>/', ProdCategory.as_view(), name='category'),
     path('register/', RegisterUser.as_view(), name='register'),
+    path('cart/', cart_view, name='cart'),
 
     path('api/v1/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/v1/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+
+    #Add to cards Afunctions
+    path('product/add_to_cart/<int:product_id>/', add_to_cart, name='add_to_cart'),
+    path('product/remove/<int:product_id>/', remove_from_cart, name='remove_from_cart'),
+
 ]
+

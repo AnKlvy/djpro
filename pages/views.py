@@ -20,7 +20,6 @@ from rest_framework import viewsets, generics
 from .serializers import *
 
 
-# Create your views here.
 # видео классы представлений чтобы отображать категории
 class PagesHome(DataMixin, ListView):
     model = Products
@@ -93,7 +92,7 @@ class ProdCategory(DataMixin, ListView):
                                       cat_selected=c.pk)
         return dict(list(context.items()) + list(c_def.items()))
 
-
+# Here we are create for users
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
     template_name = 'pages/forms/register.html'
@@ -169,6 +168,68 @@ class ContactFormView(DataMixin, FormView):
         print(form.cleaned_data)
         return redirect('home')
 
+
+# Functions our cards
+@login_required
+def cart_view(request):
+    try:
+        cart = Cart.objects.get(user=request.user)
+        items = cart.items.all()
+        total = sum(item.product.price * item.quantity for item in items)
+    except:
+        items = None
+        total = None
+
+    context = {
+        'items': items,
+        'total': total,
+    }
+
+    return render(request, 'pages/cart.html', context)
+
+
+# def add_to_cart(request, product_id):
+#     product = get_object_or_404(Products, id=product_id)
+#     cart_item = CartItem.objects.filter(product=product).first()
+#
+#     if cart_item:
+#         cart_item.quantity += 1
+#         cart_item.save()
+#     else:
+#         cart_item = Cart(product=product)
+#         cart_item.save()
+#
+#     return redirect('pages/cart.html')
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Products, pk=product_id)
+    user = request.user
+
+    try:
+        cart = Cart.objects.get(user=user)
+    except Cart.DoesNotExist:
+        cart = Cart.objects.create(user=user)
+
+    try:
+        item = CartItem.objects.get(cart=cart, product=product)
+        item.quantity += 1
+        item.save()
+    except CartItem.DoesNotExist:
+        item = CartItem.objects.create(cart=cart, product=product, quantity=1)
+
+    return redirect('cart')
+
+
+@login_required
+def remove_from_cart(request, product_id):
+    item = get_object_or_404(CartItem, pk=product_id)
+
+    if item.cart.user != request.user:
+        raise Http404
+
+    item.delete()
+
+    return redirect('cart')
 
 # ERRORS LOGIC
 def error_404(request, exception):
