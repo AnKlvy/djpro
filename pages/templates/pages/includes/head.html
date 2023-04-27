@@ -13,7 +13,9 @@
                 crossorigin="anonymous"></script>
         <style>
     {#@import  url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');#}
-
+    * {
+        font-family: fangsong;
+    }
     body {
         font-family: "Poppins", sans-serif;
         color: #444444;
@@ -26,7 +28,7 @@
     }
 
     .section-products {
-        padding: 80px 0 54px;
+        padding: 0px 0 0px;
     }
 
     .section-products .header {
@@ -90,6 +92,13 @@
         left: 0;
         background-color: #444444;
     }
+
+    {#Paginations style#}
+    ul.pagination {
+        display: flex;
+        justify-content: center;
+    }
+
 
     .section-products .single-product .part-1 ul {
         position: absolute;
@@ -155,6 +164,43 @@
         transform: translateY(-50%);
     }
 
+    .cart_button{
+        background: red;
+        color: white;
+        border: 1px solid palevioletred;
+        border-radius: 10px;
+        width: 100px;
+        position: relative;
+        padding: 5px;
+        top: 30px;
+    }
+{#    Cart td top#}
+     .td_top {
+         position: relative;
+         top: 20px;
+     }
+
+{#     Link for name #}
+    .name__link {
+        color: #0f0f0f;
+    }
+    .name__link:hover {
+        transition: color 1s;
+        color: gray;
+    }
+
+{#    Add post form#}
+    #id_photo {
+        position: relative;
+        margin: 20px;
+    }
+    #id_is_published {
+
+    }
+    #id_categories{
+        position: relative;
+
+    }
 </style>
         <link rel="stylesheet" href=""/>
     </head>

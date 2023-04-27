@@ -20,13 +20,13 @@
                 <tr>
 
                     <td><img width="100px" src="{{ item.product.photo.url }}" /></td>
-                    <td>{{ item.product.name }}</td>
-                    <td>{{ item.quantity }}</td>
-                    <td>{{ item.product.price }}</td>
+                    <td class="td_top">{{ item.product.name }}</td>
+                    <td class="td_top">{{ item.quantity }}</td>
+                    <td class="td_top">{{ item.product.price }}</td>
                     <td>
                         <form action="{% url 'remove_from_cart' item.pk %}" method="post">
                             {% csrf_token %}
-                            <button type="submit"> Удалить</button>
+                            <button class="btn btn-danger mt-4" type="submit"> Удалить</button>
                         </form>
                     </td>
                 </tr>

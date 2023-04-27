@@ -1,14 +1,22 @@
 {% extends 'pages/index.html' %}
 {% block content %}
-    <h1>{{ product.name }}</h1>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-sm-6">
+                {% if product.photo %}
+                    <img width="100" class="w-100 h-auto rounded" src="{{ product.photo.url }}" alt="{{ p.name }}">
+                {% endif %}
+            </div>
+            <div class="col-sm-6">
+                <h1 class="text-center">{{ product.name }}</h1>
+                <hr>
+                <p class="text-left mt-5">{{ product.description|linebreaks }}</p>
+                <form action="{% url 'add_to_cart' product.pk %}" method="post">
+                    {% csrf_token %}
+                    <button class="btn btn-primary mt-5" type="submit">Добавить в корзину</button>
+                </form>
 
-    {% if product.photo %}
-        <p><img class="w-50 h-auto rounded" src="{{ product.photo.url }}" alt="{{ p.name }}"></p>
-    {% endif %}
-    <form action="{% url 'add_to_cart' product.pk %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Добавить в корзину</button>
-    </form>
-
-    {{ product.description|linebreaks }}
+            </div>
+        </div>
+    </div>
 {% endblock content %}
