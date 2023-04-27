@@ -13,8 +13,8 @@ class ProdAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     prepopulated_fields = {"slug": ("name",)}
     fields = (
-        'name', 'slug', 'categories', 'description', 'photo', 'get_html_photo', 'is_published', 'time_create',
-        'time_update')
+        'name', 'slug','price', 'categories', 'description', 'photo', 'get_html_photo', 'is_published', 'time_create',
+        'time_update', 'user')
     readonly_fields = ('time_create', 'time_update', 'get_html_photo')
     save_on_top = True
 

@@ -18,6 +18,7 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/Lib" />
       <excludeFolder url="file://$MODULE_DIR$/Scripts" />
+      <excludeFolder url="file://$MODULE_DIR$/photos/2023/04/27" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.10 (djpro)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
