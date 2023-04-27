@@ -92,6 +92,7 @@ class ProdCategory(DataMixin, ListView):
                                       cat_selected=c.pk)
         return dict(list(context.items()) + list(c_def.items()))
 
+
 # Here we are create for users
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
@@ -231,6 +232,7 @@ def remove_from_cart(request, product_id):
 
     return redirect('cart')
 
+
 # ERRORS LOGIC
 def error_404(request, exception):
     return render(request, 'errors/404.html')
@@ -264,7 +266,7 @@ class ProductsApiList(generics.ListCreateAPIView):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
     pagination_class = ProductsAPIListPagination
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAdminOrReadOnly,)
 
 
 class ProductsAPIUpdate(generics.RetrieveUpdateAPIView):
@@ -272,6 +274,7 @@ class ProductsAPIUpdate(generics.RetrieveUpdateAPIView):
     serializer_class = ProductsSerializer
     # permission_classes = (IsOwnerOrReadOnly,)
     permission_classes = (IsAuthenticated,)
+
 
 class ProductsAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = Products.objects.all()
