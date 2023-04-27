@@ -270,8 +270,8 @@ class ProductsApiList(generics.ListCreateAPIView):
 class ProductsAPIUpdate(generics.RetrieveUpdateAPIView):
     queryset = Products.objects.all()
     serializer_class = ProductsSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
-
+    # permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticated,)
 
 class ProductsAPIDestroy(generics.RetrieveDestroyAPIView):
     queryset = Products.objects.all()
